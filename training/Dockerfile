@@ -11,7 +11,9 @@ RUN apt-get update && \
 
 RUN pip3 install -U pip
 
-RUN pip3 --no-cache-dir install tensorflowjs==0.8.6
+RUN pip3 install tensorflow==1.14
+
+RUN pip3 --no-cache-dir install tensorflowjs==1.2.6
 
 WORKDIR /
 
