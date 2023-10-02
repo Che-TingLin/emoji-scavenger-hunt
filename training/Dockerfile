@@ -36,7 +36,6 @@ CMD python3 /tensorflow/tensorflow/examples/image_retraining/retrain.py \
     echo '}' >> /data/scavenger_classes.ts && \
     python3 -m tensorflowjs.converters.converter \
         --input_format=tf_saved_model \
-        --output_node_names='final_result' \
         --saved_model_tags=serve \
         /data/saved_model/ \
         /data/saved_model_web/
