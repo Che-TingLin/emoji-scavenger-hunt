@@ -13,28 +13,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-runtime: python27
+runtime: python39
 api_version: 1
 threadsafe: true
 instance_class: F4_1G
 
 handlers:
-- url: /model/(group1-shard1of1)
-  secure: always
-  static_files: dist/model/\1
-  upload: dist/model/(.*)
-  http_headers:
-    X-Frame-Options: "DENY"
-    Strict-Transport-Security: "max-age=2592000; includeSubdomains"
-    X-Content-Type-Options: "nosniff"
-    X-XSS-Protection: "1; mode=block"
-    Content-Security-Policy:
-      base-uri 'none';
-      object-src 'none';
-      font-src 'self'
+  - url: /model/(group1-shard1of1)
+    secure: always
+    static_files: dist/model/\1
+    upload: dist/model/(.*)
+    http_headers:
+      X-Frame-Options: 'DENY'
+      Strict-Transport-Security: 'max-age=2592000; includeSubdomains'
+      X-Content-Type-Options: 'nosniff'
+      X-XSS-Protection: '1; mode=block'
+      Content-Security-Policy: base-uri 'none';
+        object-src 'none';
+        font-src 'self'
         *.gstatic.com
         fonts.googleapis.com;
-      script-src 'self' 'unsafe-inline'
+        script-src 'self' 'unsafe-inline'
         *.googleanalytics.com
         *.google-analytics.com
         *.googletagmanager.com
@@ -42,26 +41,25 @@ handlers:
         *.youtube.com
         *.ytimg.com
         static.doubleclick.net;
-      style-src 'self' 'unsafe-inline'
+        style-src 'self' 'unsafe-inline'
         fonts.googleapis.com
         *.gstatic.com;
 
-- url: /model/(.*\.(pb|json))
-  secure: always
-  static_files: dist/model/\1
-  upload: dist/model/(.*)
-  http_headers:
-    X-Frame-Options: "DENY"
-    Strict-Transport-Security: "max-age=2592000; includeSubdomains"
-    X-Content-Type-Options: "nosniff"
-    X-XSS-Protection: "1; mode=block"
-    Content-Security-Policy:
-      base-uri 'none';
-      object-src 'none';
-      font-src 'self'
+  - url: /model/(.*\.(pb|json))
+    secure: always
+    static_files: dist/model/\1
+    upload: dist/model/(.*)
+    http_headers:
+      X-Frame-Options: 'DENY'
+      Strict-Transport-Security: 'max-age=2592000; includeSubdomains'
+      X-Content-Type-Options: 'nosniff'
+      X-XSS-Protection: '1; mode=block'
+      Content-Security-Policy: base-uri 'none';
+        object-src 'none';
+        font-src 'self'
         *.gstatic.com
         fonts.googleapis.com;
-      script-src 'self' 'unsafe-inline'
+        script-src 'self' 'unsafe-inline'
         *.googleanalytics.com
         *.google-analytics.com
         *.googletagmanager.com
@@ -69,27 +67,26 @@ handlers:
         *.youtube.com
         *.ytimg.com
         static.doubleclick.net;
-      style-src 'self' 'unsafe-inline'
+        style-src 'self' 'unsafe-inline'
         fonts.googleapis.com
         *.gstatic.com;
 
-# Static assets (anything with a file extension)
-- url: /(.*\..*)
-  secure: always
-  static_files: dist/\1
-  upload: dist/(.*)
-  http_headers:
-    X-Frame-Options: "DENY"
-    Strict-Transport-Security: "max-age=2592000; includeSubdomains"
-    X-Content-Type-Options: "nosniff"
-    X-XSS-Protection: "1; mode=block"
-    Content-Security-Policy:
-      base-uri 'none';
-      object-src 'none';
-      font-src 'self'
+  # Static assets (anything with a file extension)
+  - url: /(.*\..*)
+    secure: always
+    static_files: dist/\1
+    upload: dist/(.*)
+    http_headers:
+      X-Frame-Options: 'DENY'
+      Strict-Transport-Security: 'max-age=2592000; includeSubdomains'
+      X-Content-Type-Options: 'nosniff'
+      X-XSS-Protection: '1; mode=block'
+      Content-Security-Policy: base-uri 'none';
+        object-src 'none';
+        font-src 'self'
         *.gstatic.com
         fonts.googleapis.com;
-      script-src 'self' 'unsafe-inline'
+        script-src 'self' 'unsafe-inline'
         *.googleanalytics.com
         *.google-analytics.com
         *.googletagmanager.com
@@ -97,27 +94,26 @@ handlers:
         *.youtube.com
         *.ytimg.com
         static.doubleclick.net;
-      style-src 'self' 'unsafe-inline'
+        style-src 'self' 'unsafe-inline'
         fonts.googleapis.com
         *.gstatic.com;
 
-# Root
-- url: /
-  secure: always
-  static_files: dist/index.html
-  upload: dist/(.*)
-  http_headers:
-    X-Frame-Options: "DENY"
-    Strict-Transport-Security: "max-age=2592000; includeSubdomains"
-    X-Content-Type-Options: "nosniff"
-    X-XSS-Protection: "1; mode=block"
-    Content-Security-Policy:
-      base-uri 'none';
-      object-src 'none';
-      font-src 'self'
+  # Root
+  - url: /
+    secure: always
+    static_files: dist/index.html
+    upload: dist/(.*)
+    http_headers:
+      X-Frame-Options: 'DENY'
+      Strict-Transport-Security: 'max-age=2592000; includeSubdomains'
+      X-Content-Type-Options: 'nosniff'
+      X-XSS-Protection: '1; mode=block'
+      Content-Security-Policy: base-uri 'none';
+        object-src 'none';
+        font-src 'self'
         *.gstatic.com
         fonts.googleapis.com;
-      script-src 'self' 'unsafe-inline'
+        script-src 'self' 'unsafe-inline'
         *.googleanalytics.com
         *.google-analytics.com
         *.googletagmanager.com
@@ -125,27 +121,26 @@ handlers:
         *.youtube.com
         *.ytimg.com
         static.doubleclick.net;
-      style-src 'self' 'unsafe-inline'
+        style-src 'self' 'unsafe-inline'
         fonts.googleapis.com
         *.gstatic.com;
 
-# Paths with a trailing slash
-- url: /(.*\/)
-  secure: always
-  static_files: dist/\1index.html
-  upload: dist/(.*)
-  http_headers:
-    X-Frame-Options: "DENY"
-    Strict-Transport-Security: "max-age=2592000; includeSubdomains"
-    X-Content-Type-Options: "nosniff"
-    X-XSS-Protection: "1; mode=block"
-    Content-Security-Policy:
-      base-uri 'none';
-      object-src 'none';
-      font-src 'self'
+  # Paths with a trailing slash
+  - url: /(.*\/)
+    secure: always
+    static_files: dist/\1index.html
+    upload: dist/(.*)
+    http_headers:
+      X-Frame-Options: 'DENY'
+      Strict-Transport-Security: 'max-age=2592000; includeSubdomains'
+      X-Content-Type-Options: 'nosniff'
+      X-XSS-Protection: '1; mode=block'
+      Content-Security-Policy: base-uri 'none';
+        object-src 'none';
+        font-src 'self'
         *.gstatic.com
         fonts.googleapis.com;
-      script-src 'self' 'unsafe-inline'
+        script-src 'self' 'unsafe-inline'
         *.googleanalytics.com
         *.google-analytics.com
         *.googletagmanager.com
@@ -153,27 +148,26 @@ handlers:
         *.youtube.com
         *.ytimg.com
         static.doubleclick.net;
-      style-src 'self' 'unsafe-inline'
+        style-src 'self' 'unsafe-inline'
         fonts.googleapis.com
         *.gstatic.com;
 
-# Paths without a trailing slash
-- url: /(.*)?
-  secure: always
-  static_files: dist/\1/index.html
-  upload: dist/(.*)
-  http_headers:
-    X-Frame-Options: "DENY"
-    Strict-Transport-Security: "max-age=2592000; includeSubdomains"
-    X-Content-Type-Options: "nosniff"
-    X-XSS-Protection: "1; mode=block"
-    Content-Security-Policy:
-      base-uri 'none';
-      object-src 'none';
-      font-src 'self'
+  # Paths without a trailing slash
+  - url: /(.*)?
+    secure: always
+    static_files: dist/\1/index.html
+    upload: dist/(.*)
+    http_headers:
+      X-Frame-Options: 'DENY'
+      Strict-Transport-Security: 'max-age=2592000; includeSubdomains'
+      X-Content-Type-Options: 'nosniff'
+      X-XSS-Protection: '1; mode=block'
+      Content-Security-Policy: base-uri 'none';
+        object-src 'none';
+        font-src 'self'
         *.gstatic.com
         fonts.googleapis.com;
-      script-src 'self' 'unsafe-inline'
+        script-src 'self' 'unsafe-inline'
         *.googleanalytics.com
         *.google-analytics.com
         *.googletagmanager.com
@@ -181,17 +175,17 @@ handlers:
         *.youtube.com
         *.ytimg.com
         static.doubleclick.net;
-      style-src 'self' 'unsafe-inline'
+        style-src 'self' 'unsafe-inline'
         fonts.googleapis.com
         *.gstatic.com;
 
 skip_files:
-- ^.*node_modules(/.*)?
-- ^src.*
-- ^web.*
-- ^.*\.pyc$
-- ^.*\.map$
-- ^\.git.*
-- ^\.tmp/.*
-- ^training/.*
-- ^.DS_Store
+  - ^.*node_modules(/.*)?
+  - ^src.*
+  - ^web.*
+  - ^.*\.pyc$
+  - ^.*\.map$
+  - ^\.git.*
+  - ^\.tmp/.*
+  - ^training/.*
+  - ^.DS_Store
