@@ -24,7 +24,7 @@ import {VIEWS, ui, GAME_STRINGS} from './ui';
 import {share} from './share';
 import {getQueryParam, isIOS} from './utils';
 import {shuffle} from 'lodash';
-import * as tfc from '@tensorflow/tfjs-core';
+import * as tf from '@tensorflow/tfjs-core';
 import {SPEECH_SPRITE_TIMESTAMPS} from './speech_sprite_timestamps';
 import {EmojiItem, EMOJIS_LVL_1, EMOJIS_LVL_2, EMOJIS_LVL_3, EMOJIS_LVL_4,
      EMOJIS_LVL_5, EMOJIS_LVL_DEMO} from './game_levels';
@@ -339,7 +339,7 @@ export class Game {
    */
   warmUpModel() {
     this.emojiScavengerMobileNet.predict(
-        tfc.zeros([VIDEO_PIXELS, VIDEO_PIXELS, 3]));
+        tf.zeros([VIDEO_PIXELS, VIDEO_PIXELS, 3]));
   }
 
   /**
@@ -357,26 +357,31 @@ export class Game {
         this.stats.begin();
       }
 
-      // Run the tensorflow predict logic inside a tfc.tidy call which helps
+      // Run the tensorflow predict logic inside a tf.tidy call which helps
       // to clean up memory from tensorflow calls once they are done.
-      const result = tfc.tidy(() => {
-
+      const result = tf.tidy(() => {
         // For UX reasons we spread the video element to 100% of the screen
-        // but our traning data is trained against 244px images. Before we
+        // but our training data is trained against 244px images. Before we
         // send image data from the camera to the predict engine we slice a
         // 244 pixel area out of the center of the camera screen to ensure
         // better matching against our model.
-        const pixels = tfc.fromPixels(camera.videoElement);
+    
+        // Convert the video element pixels to a tensor
+        const pixels = tf.browser.fromPixels(camera.videoElement);
+    
+        // Calculate the center of the video element
         const centerHeight = pixels.shape[0] / 2;
         const beginHeight = centerHeight - (VIDEO_PIXELS / 2);
         const centerWidth = pixels.shape[1] / 2;
         const beginWidth = centerWidth - (VIDEO_PIXELS / 2);
-        const pixelsCropped =
-              pixels.slice([beginHeight, beginWidth, 0],
-                           [VIDEO_PIXELS, VIDEO_PIXELS, 3]);
-
+    
+        // Crop the tensor to get the center 244 pixels
+        const pixelsCropped = pixels.slice([beginHeight, beginWidth, 0], [VIDEO_PIXELS, VIDEO_PIXELS, 3]);
+    
+        // Predict using the cropped tensor
         return this.emojiScavengerMobileNet.predict(pixelsCropped);
-      });
+    });
+    
 
       // This call retrieves the topK matches from our MobileNet for the
       // provided image data.
